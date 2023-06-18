@@ -1,7 +1,6 @@
 package com.tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
