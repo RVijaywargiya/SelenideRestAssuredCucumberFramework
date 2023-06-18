@@ -8,7 +8,7 @@ public class BrowserUtils {
 
     public static void openSite() {
         Configuration.browser = "edge";
-        Configuration.headless = false;
+        Configuration.headless = true;
         open("https://www.saucedemo.com/v1/");
     }
 

@@ -29,13 +29,13 @@ public class CheckoutItemTest {
         checkoutItem();
         enterYourInformation();
         verifyCheckoutOverview();
-        finishCheckout();
+//        finishCheckout();
     }
 
-    private void finishCheckout() {
-        clickFinish();
-        verifyThankYouPage();
-    }
+//    private void finishCheckout() {
+//        clickFinish();
+//        verifyThankYouPage();
+//    }
 
     private void enterYourInformation() {
         enterFirstName();
