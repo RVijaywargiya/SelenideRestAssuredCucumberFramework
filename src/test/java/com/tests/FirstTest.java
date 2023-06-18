@@ -1,23 +1,22 @@
 package com.tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static utils.BrowserUtils.*;
 
 public class FirstTest {
 
     @BeforeTest
-    public void openApp() {
-        open("https://www.saucedemo.com/v1/");
-        getWebDriver().manage().window().maximize();
-        $("#user-name").setValue("standard_user");
-        $("#password").setValue("secret_sauce");
-        $("#login-button").click();
+    public void loginToApp() {
+        openSite();
+        maximize();
+        setTextInField(By.xpath("//*[@id='user-name']"),"standard_user");
+        setTextInField(By.xpath("//*[@id='password']"), "secret_sauce");
+        clickElement(By.xpath("//*[@id='login-button']"));
     }
 
     @Test
