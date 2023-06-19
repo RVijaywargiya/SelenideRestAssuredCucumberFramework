@@ -6,26 +6,30 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class BrowserUtils {
 
-    public static void openSite() {
+    public BrowserUtils openSite() {
         Configuration.browser = "edge";
-        Configuration.headless = true;
+        Configuration.headless = false;
         open("https://www.saucedemo.com/v1/");
+        return this;
     }
 
-    public static void maximize() {
+    public BrowserUtils maximize() {
         getWebDriver().manage().window().maximize();
+        return this;
     }
 
-    public static void setTextInField(By by, String text) {
+    public BrowserUtils setTextInField(By by, String text) {
         $(by).setValue(text);
+        return this;
     }
 
     public static String getTextFromField(By by) {
         return $(by).getValue();
     }
 
-    public static void clickElement(By by) {
+    public BrowserUtils clickElement(By by) {
         $(by).click();
+        return this;
     }
 
 }
