@@ -1,4 +1,4 @@
-package com.tests;
+package com.ui.tests;
 
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
