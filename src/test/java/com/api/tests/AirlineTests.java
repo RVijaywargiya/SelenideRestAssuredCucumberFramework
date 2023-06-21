@@ -7,35 +7,44 @@ import static io.restassured.RestAssured.given;
 public class AirlineTests {
 
     @Test
-    public void getAPost() {
+    public void getABooking() {
         given()
-                .baseUri("https://jsonplaceholder.typicode.com")
-                .basePath("/posts/1")
+                .baseUri("https://restful-booker.herokuapp.com/booking")
+                .basePath("/4")
                 .log()
                 .all()
         .when()
                 .get()
         .then()
                 .log()
-                .all();
+                .all()
+                .statusCode(200);
     }
 
     @Test
-    public void createPost() {
+    public void createBooking() {
         given()
-                .baseUri("https://jsonplaceholder.typicode.com")
-                .header("Content-type","application/json; charset=UTF-8")
+                .baseUri("https://restful-booker.herokuapp.com")
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
                 .body("{\n" +
-                        "    title: 'foo',\n" +
-                        "    body: 'bar',\n" +
-                        "    userId: 1,\n" +
-                        "  }")
+                        "    \"firstname\" : \"Jim\",\n" +
+                        "    \"lastname\" : \"Brown\",\n" +
+                        "    \"totalprice\" : 111,\n" +
+                        "    \"depositpaid\" : true,\n" +
+                        "    \"bookingdates\" : {\n" +
+                        "        \"checkin\" : \"2018-01-01\",\n" +
+                        "        \"checkout\" : \"2019-01-01\"\n" +
+                        "    },\n" +
+                        "    \"additionalneeds\" : \"Breakfast\"\n" +
+                        "}")
                 .log()
                 .all()
         .when()
-                .post("/posts")
+                .post("/booking")
         .then()
                 .log()
-                .all();
+                .all()
+                .statusCode(200);
     }
 }
