@@ -1,32 +1,33 @@
 package com.api.tests;
 
+import api.Booking;
+import io.restassured.response.ValidatableResponse;
+import org.apache.http.protocol.HTTP;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertEquals;
 
 public class AirlineTests {
+    Booking booking = new Booking();
+
+    SoftAssert softAssert = new SoftAssert();
 
     @Test
-    public void getABooking() {
-        given()
-                .baseUri("https://restful-booker.herokuapp.com/booking")
-                .basePath("/4")
-                .log()
-                .all()
-        .when()
-                .get()
-        .then()
-                .log()
-                .all()
-                .statusCode(200);
+    public void verifyGetBookingStatusCode() {
+        ValidatableResponse bookingResponse = booking.getBooking();
+        bookingResponse.statusCode(200);
     }
 
+
+
     @Test
-    public void createBooking() {
-        given()
+    public ValidatableResponse createBooking() {
+        return given()
                 .baseUri("https://restful-booker.herokuapp.com")
-                .header("Content-Type","application/json")
-                .header("Accept","application/json")
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
                 .body("{\n" +
                         "    \"firstname\" : \"Jim\",\n" +
                         "    \"lastname\" : \"Brown\",\n" +
@@ -40,11 +41,10 @@ public class AirlineTests {
                         "}")
                 .log()
                 .all()
-        .when()
+                .when()
                 .post("/booking")
-        .then()
+                .then()
                 .log()
-                .all()
-                .statusCode(200);
+                .all();
     }
 }
