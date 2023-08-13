@@ -13,7 +13,7 @@ public class CartPage extends BrowserUtils {
     public static final SelenideElement checkoutButton = $(byXpath("//a[contains(@class,'checkout_button')]"));
 
     public CartPage verifyItemAddedToCart(String sauceLabsBikeLight) {
-        $(By.xpath("//*[contains(text(),'"+sauceLabsBikeLight+"')]")).shouldBe(Condition.appear);
+        $(byXpath("//*[contains(text(),'"+sauceLabsBikeLight+"')]")).shouldBe(Condition.appear);
         return new CartPage();
     }
     public YourInfoPage checkoutItem() {
