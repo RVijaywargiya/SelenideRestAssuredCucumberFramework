@@ -6,9 +6,17 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class BrowserUtils {
 
+    public BrowserUtils setBrowser() {
+        Configuration.browser = System.getProperty("browser");
+        return this;
+    }
+
+    public BrowserUtils setMode() {
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless"));
+        return this;
+    }
+
     public BrowserUtils openSite() {
-        Configuration.browser = "edge";
-        Configuration.headless = false;
         open("https://www.saucedemo.com/v1/");
         return this;
     }

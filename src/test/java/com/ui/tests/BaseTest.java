@@ -8,8 +8,10 @@ import utils.BrowserUtils;
 public class BaseTest {
 
     @BeforeSuite
-    public void openBrowser() {
+    public void setUp() {
         new BrowserUtils().
+                setBrowser().
+                setMode().
                 openSite().
                 maximize();
     }
