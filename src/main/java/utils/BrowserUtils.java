@@ -1,5 +1,6 @@
 package utils;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
@@ -29,16 +30,16 @@ public class BrowserUtils {
         getWebDriver().manage().window().maximize();
     }
 
-    public void setTextInField(By by, String text) {
-        $(by).setValue(text);
+    public void setTextInField(SelenideElement element, String text) {
+        element.setValue(text);
     }
 
     public static String getTextFromField(By by) {
         return $(by).getValue();
     }
 
-    public void clickElement(By by) {
-        $(by).click();
+    public void clickElement(SelenideElement element) {
+        element.click();
     }
 
 }
