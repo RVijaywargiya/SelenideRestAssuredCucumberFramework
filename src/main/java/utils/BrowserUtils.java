@@ -1,6 +1,10 @@
 package utils;
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
+
+import java.io.IOException;
+import java.util.Properties;
+
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -16,8 +20,8 @@ public class BrowserUtils {
         return this;
     }
 
-    public BrowserUtils openSite() {
-        open("https://www.saucedemo.com/v1/");
+    public BrowserUtils openSite() throws IOException {
+        open(new PropertyUtils().getProperty("url"));
         return this;
     }
 

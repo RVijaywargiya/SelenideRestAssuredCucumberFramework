@@ -5,10 +5,12 @@ import org.testng.annotations.BeforeTest;
 import pages.LoginPage;
 import utils.BrowserUtils;
 
+import java.io.IOException;
+
 public class BaseTest {
 
     @BeforeSuite
-    public void setUp() {
+    public void setUp() throws IOException {
         new BrowserUtils().
                 setBrowser().
                 setMode().
