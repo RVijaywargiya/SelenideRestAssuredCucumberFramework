@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertyUtils {
 
-    Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     private void propertySetup() throws IOException {
         File file = new File("src/main/resources/config/uiconfig.properties");

@@ -7,6 +7,10 @@ import static utils.FakeData.*;
 
 public class YourInfoPage extends BrowserUtils {
 
+    public static YourInfoPage getInstance() {
+        return new YourInfoPage();
+    }
+
     public void enterYourInformation() {
         enterFirstName()
                 .enterLastName()

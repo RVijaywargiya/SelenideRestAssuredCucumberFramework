@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.java.Log;
 import org.openqa.selenium.By;
 import utils.BrowserUtils;
 
@@ -8,6 +9,10 @@ public class LoginPage extends BrowserUtils {
     private final By userNameTextBox = By.xpath("//*[@id='user-name']");
     private final By passwordTextBox = By.xpath("//*[@id='password']");
     private final By loginButton = By.xpath("//*[@id='login-button']");
+
+    public static LoginPage getInstance() {
+        return new LoginPage();
+    }
 
     public LoginPage enterUsername(String userName) {
         setTextInField(userNameTextBox, userName);

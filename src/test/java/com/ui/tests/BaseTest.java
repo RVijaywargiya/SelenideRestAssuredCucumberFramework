@@ -20,7 +20,7 @@ public class BaseTest {
 
     @BeforeTest
     public void loginToApp() {
-        new LoginPage()
+        LoginPage.getInstance()
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginButton();

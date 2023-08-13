@@ -7,9 +7,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ItemsPage extends BrowserUtils {
 
+    public static ItemsPage getInstance() {
+        return new ItemsPage();
+    }
+
     public ItemsPage addSpecificItemToCart(String sauceLabsBikeLight) {
         $(By.xpath("//*[contains(text(),'"+ sauceLabsBikeLight +"')]/../../following-sibling::div//button")).click();
-        return new ItemsPage();
+        return this;
     }
 
     public CartPage navigateToMyCartPage() {
