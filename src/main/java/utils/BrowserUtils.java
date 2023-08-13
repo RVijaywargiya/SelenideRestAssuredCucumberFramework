@@ -13,23 +13,20 @@ public class BrowserUtils {
         return this;
     }
 
-    public BrowserUtils maximize() {
+    public void maximize() {
         getWebDriver().manage().window().maximize();
-        return this;
     }
 
-    public BrowserUtils setTextInField(By by, String text) {
+    public void setTextInField(By by, String text) {
         $(by).setValue(text);
-        return this;
     }
 
     public static String getTextFromField(By by) {
         return $(by).getValue();
     }
 
-    public BrowserUtils clickElement(By by) {
+    public void clickElement(By by) {
         $(by).click();
-        return this;
     }
 
 }
