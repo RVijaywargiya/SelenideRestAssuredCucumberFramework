@@ -5,6 +5,7 @@ import io.restassured.response.ValidatableResponse;
 import org.apache.http.protocol.HTTP;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import utils.MockUtils;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
@@ -13,6 +14,8 @@ public class AirlineTests {
     Booking booking = new Booking();
 
     SoftAssert softAssert = new SoftAssert();
+
+    MockUtils mockUtils = new MockUtils();
 
     @Test
     public void verifyGetBookingStatusCode() {
@@ -46,5 +49,20 @@ public class AirlineTests {
                 .then()
                 .log()
                 .all();
+    }
+
+    @Test
+    public void testMock() {
+        mockUtils.startMockServer();
+        mockUtils.setWireMockServer();
+        ValidatableResponse response = given()
+                .baseUri("http://localhost:8080")
+                .log()
+                .all()
+                .get("/test")
+                .then()
+                .log()
+                .all();
+        mockUtils.stopMockServer();
     }
 }

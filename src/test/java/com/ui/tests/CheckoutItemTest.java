@@ -1,16 +1,10 @@
 package com.ui.tests;
 
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.CartPage;
 import pages.ItemsPage;
-import pages.YourInfoPage;
 import utils.BrowserUtils;
-
-import static com.codeborne.selenide.Selenide.*;
-import static utils.FakeData.*;
 
 public class CheckoutItemTest {
 
