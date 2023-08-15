@@ -2,15 +2,18 @@ package api;
 
 import io.restassured.response.ValidatableResponse;
 import pojo.BookingDetails;
+import utils.ApiUtils;
+
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
-public class Booking {
+public class Booking extends ApiUtils {
 
-    public ValidatableResponse getBooking() {
+    public ValidatableResponse getBooking() throws IOException {
         return given()
-                .baseUri("https://restful-booker.herokuapp.com/booking")
-                .basePath("/54")
+                .baseUri(getBaseUri())
+                .basePath(getBasePath())
                 .log()
                 .all()
                 .when()
@@ -20,7 +23,7 @@ public class Booking {
                 .all();
     }
 
-    public BookingDetails getBookingAsClass() {
+    public BookingDetails getBookingAsClass() throws IOException {
         return getBooking().extract().as(BookingDetails.class);
     }
 }

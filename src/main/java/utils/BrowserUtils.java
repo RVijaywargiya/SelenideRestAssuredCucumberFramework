@@ -1,12 +1,13 @@
 package utils;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
-import java.util.Properties;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class BrowserUtils {
@@ -22,7 +23,7 @@ public class BrowserUtils {
     }
 
     public BrowserUtils openSite() throws IOException {
-        open(new PropertyUtils().getProperty("url"));
+        open(new PropertyUtils().getProperty("src/main/resources/config/ui-config.properties","url"));
         return this;
     }
 

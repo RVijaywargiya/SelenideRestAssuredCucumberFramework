@@ -2,13 +2,13 @@ package com.api.tests;
 
 import api.Booking;
 import io.restassured.response.ValidatableResponse;
-import org.apache.http.protocol.HTTP;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.MockUtils;
 
+import java.io.IOException;
+
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
 
 public class AirlineTests {
     Booking booking = new Booking();
@@ -18,7 +18,7 @@ public class AirlineTests {
     MockUtils mockUtils = new MockUtils();
 
     @Test
-    public void verifyGetBookingStatusCode() {
+    public void verifyGetBookingStatusCode() throws IOException {
         ValidatableResponse bookingResponse = booking.getBooking();
         bookingResponse.statusCode(200);
     }
