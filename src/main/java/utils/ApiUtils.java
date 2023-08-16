@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
-public class ApiUtils {
+public class ApiUtils extends ExcelUtils{
 
     protected static String getBaseUri() throws IOException {
         return new PropertyUtils().getProperty("src/main/resources/config/api-config.properties", "baseUri");
@@ -25,5 +25,9 @@ public class ApiUtils {
                 .basePath(getBasePathGET())
                 .log()
                 .all();
+    }
+
+    public String getJsonAsString() throws IOException {
+        return ExcelUtils.getExcelData();
     }
 }
