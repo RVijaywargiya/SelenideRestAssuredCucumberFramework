@@ -1,17 +1,14 @@
 package utils;
 
-import io.restassured.response.Response;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
-import net.minidev.json.JSONObject;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import static io.restassured.RestAssured.given;
+public class ApiUtils extends ExcelUtils {
 
-public class ApiUtils extends ExcelUtils{
-
-    protected static String getBaseUri() throws IOException {
+    public static String getBaseUri() throws IOException {
         return new PropertyUtils().getProperty("src/main/resources/config/api-config.properties", "baseUri");
     }
     protected static String getBasePathGET() throws IOException {
@@ -19,13 +16,6 @@ public class ApiUtils extends ExcelUtils{
     }
     protected static String getBasePathPOST() throws IOException {
         return new PropertyUtils().getProperty("src/main/resources/config/api-config.properties", "basePathPOST");
-    }
-
-    public RequestSpecification getRequestSpecs() throws IOException {
-        return given()
-                .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
-                .baseUri(getBaseUri());
     }
 
     public String getJsonAsString() throws IOException {

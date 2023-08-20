@@ -19,7 +19,7 @@ public class ExcelUtils {
     public static String getExcelData() throws IOException {
 
         // Load the Excel file
-        FileInputStream excelFile = new FileInputStream(new File("src/test/resources/CreateBooking.xlsx"));
+        FileInputStream excelFile = new FileInputStream("src/test/resources/CreateBooking.xlsx");
         Workbook workbook = new XSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is on the first sheet
 
@@ -29,7 +29,6 @@ public class ExcelUtils {
         for (Row row : sheet) {
             Map<String, Object> rowData = new HashMap<>();
             for (Cell cell : row) {
-
                 CellType cellType = cell.getCellType();
                 if (cellType == CellType.STRING) {
                     System.out.print(cell.getStringCellValue() + "\t");
@@ -38,8 +37,7 @@ public class ExcelUtils {
                 } else if (cellType == CellType.BLANK) {
                     System.out.print("BLANK\t");
                 }
-
-                rowData.put(sheet.getRow(1).getCell(cell.getColumnIndex()).getStringCellValue(), cell.getStringCellValue());
+                rowData.put(sheet.getRow(0).getCell(cell.getColumnIndex()).getStringCellValue(), sheet.getRow(1).getCell(cell.getColumnIndex()).getStringCellValue());
             }
             excelDataList.add(rowData);
         }

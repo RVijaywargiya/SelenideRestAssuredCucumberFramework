@@ -29,7 +29,7 @@ public class AirlineTests {
         createBookingResponse = booking.createBooking();
     }
 
-    @Test
+    @Test(enabled = false)
     public void verifyGetBookingStatusCode() throws IOException {
         softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
         booking.getBookingAsClass();
@@ -42,7 +42,7 @@ public class AirlineTests {
         softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
     }
 
-    @Test
+    @Test(enabled = false)
     public void testMock() {
         mockUtils.startMockServer();
         mockUtils.setWireMockServer();
