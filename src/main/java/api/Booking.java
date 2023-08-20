@@ -3,7 +3,6 @@ package api;
 import io.restassured.response.ValidatableResponse;
 import pojo.BookingDetails;
 import utils.ApiUtils;
-import utils.ExcelUtils;
 
 import java.io.IOException;
 
@@ -11,9 +10,11 @@ import static io.restassured.RestAssured.given;
 
 public class Booking extends ApiUtils {
 
-    public ValidatableResponse getBooking() throws IOException {
+    public ValidatableResponse getAllBookings() throws IOException {
         return getRequestSpecs()
-                .get()
+                .log()
+                .all()
+                .get(getBasePathGET())
                 .then()
                 .log()
                 .all();
@@ -35,6 +36,6 @@ public class Booking extends ApiUtils {
     }
 
     public BookingDetails getBookingAsClass() throws IOException {
-        return getBooking().extract().as(BookingDetails.class);
+        return getAllBookings().extract().as(BookingDetails.class);
     }
 }

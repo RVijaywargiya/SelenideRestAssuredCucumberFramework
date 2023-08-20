@@ -1,6 +1,7 @@
 package com.api.tests;
 
 import api.Booking;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -9,24 +10,36 @@ import utils.MockUtils;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_OK;
+import static utils.ApiUtils.getStatusCode;
 
 public class AirlineTests {
-    Booking booking = new Booking();
+    Booking booking;
 
     SoftAssert softAssert = new SoftAssert();
 
     MockUtils mockUtils = new MockUtils();
+    ValidatableResponse allBookingResponse;
+    ValidatableResponse createBookingResponse;
+
+    public AirlineTests() throws IOException {
+        booking = new Booking();
+        allBookingResponse = booking.getAllBookings();
+        createBookingResponse = booking.createBooking();
+    }
 
     @Test
     public void verifyGetBookingStatusCode() throws IOException {
-        ValidatableResponse bookingResponse = booking.getBooking();
-        bookingResponse.statusCode(200);
+        softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
+        booking.getBookingAsClass();
+        System.out.println(booking.getBookingAsClass().toString());
+//        booking.writeJsonToFile(allBookingResponse, "src/test/resources/ResponsePayloads/AllBookings.json");
     }
 
     @Test
     public void verifyCreateBookingStatusCode() throws IOException {
-        ValidatableResponse bookingResponse = booking.createBooking();
-        bookingResponse.statusCode(201);
+        softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
     }
 
     @Test
@@ -36,7 +49,7 @@ public class AirlineTests {
         ValidatableResponse response = given()
                 .baseUri("http://localhost:8080")
                 .log()
-                .all()
+                .everything()
                 .get("/test")
                 .then()
                 .log()

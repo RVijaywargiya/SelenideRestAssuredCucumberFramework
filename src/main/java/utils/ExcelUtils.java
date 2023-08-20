@@ -1,10 +1,7 @@
 package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -32,7 +29,17 @@ public class ExcelUtils {
         for (Row row : sheet) {
             Map<String, Object> rowData = new HashMap<>();
             for (Cell cell : row) {
-                rowData.put(sheet.getRow(0).getCell(cell.getColumnIndex()).getStringCellValue(), cell.getStringCellValue());
+
+                CellType cellType = cell.getCellType();
+                if (cellType == CellType.STRING) {
+                    System.out.print(cell.getStringCellValue() + "\t");
+                } else if (cellType == CellType.NUMERIC) {
+                    System.out.print(cell.getNumericCellValue() + "\t");
+                } else if (cellType == CellType.BLANK) {
+                    System.out.print("BLANK\t");
+                }
+
+                rowData.put(sheet.getRow(1).getCell(cell.getColumnIndex()).getStringCellValue(), cell.getStringCellValue());
             }
             excelDataList.add(rowData);
         }
