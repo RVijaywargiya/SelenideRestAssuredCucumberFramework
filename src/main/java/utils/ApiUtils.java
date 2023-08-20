@@ -23,6 +23,8 @@ public class ApiUtils extends ExcelUtils{
 
     public RequestSpecification getRequestSpecs() throws IOException {
         return given()
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
                 .baseUri(getBaseUri());
     }
 

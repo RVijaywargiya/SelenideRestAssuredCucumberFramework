@@ -6,14 +6,13 @@ import utils.ApiUtils;
 
 import java.io.IOException;
 
-import static io.restassured.RestAssured.given;
-
 public class Booking extends ApiUtils {
 
     public ValidatableResponse getAllBookings() throws IOException {
         return getRequestSpecs()
                 .log()
                 .all()
+                .when()
                 .get(getBasePathGET())
                 .then()
                 .log()
@@ -21,10 +20,7 @@ public class Booking extends ApiUtils {
     }
 
     public ValidatableResponse createBooking() throws IOException {
-        return given()
-                .baseUri(getBaseUri())
-                .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
+        return getRequestSpecs()
                 .body(getJsonAsString())
                 .log()
                 .all()
