@@ -1,10 +1,14 @@
 package utils;
 
-import io.restassured.builder.RequestSpecBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.ValidatableResponse;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class ApiUtils extends ExcelUtils {
 
@@ -18,7 +22,11 @@ public class ApiUtils extends ExcelUtils {
         return new PropertyUtils().getProperty("src/main/resources/config/api-config.properties", "basePathPOST");
     }
 
-    public String getJsonAsString() throws IOException {
+    public List<Map<String, String>> getJsonAsListOfMap() throws IOException {
+//        JSONObject jsonObject = new JSONObject();
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        JSONArray jsonArray = new JSONArray();
+
         return ExcelUtils.getExcelData();
     }
 

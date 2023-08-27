@@ -34,7 +34,6 @@ public class AirlineTests {
         softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
         booking.getBookingAsClass();
         System.out.println(booking.getBookingAsClass().toString());
-//        booking.writeJsonToFile(allBookingResponse, "src/test/resources/ResponsePayloads/AllBookings.json");
     }
 
     @Test

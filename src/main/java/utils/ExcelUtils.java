@@ -1,6 +1,7 @@
 package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -16,37 +17,23 @@ public class ExcelUtils {
 
     static String jsonPayload;
 
-    public static String getExcelData() throws IOException {
+    public static List<Map<String, String>> getExcelData() throws IOException {
 
         // Load the Excel file
         FileInputStream excelFile = new FileInputStream("src/test/resources/CreateBooking.xlsx");
         Workbook workbook = new XSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is on the first sheet
+        Map<String, String> mapData = new HashMap<>();
 
-        List<Map<String, Object>> excelDataList = new ArrayList<>();
+        Row firstRow = sheet.getRow(0);
+        List<Map<String, String>> data = new ArrayList<>();
 
-        // Iterate through rows and columns to create a list of maps
-        for (Row row : sheet) {
-            Map<String, Object> rowData = new HashMap<>();
-            for (Cell cell : row) {
-                CellType cellType = cell.getCellType();
-                if (cellType == CellType.STRING) {
-                    System.out.print(cell.getStringCellValue() + "\t");
-                } else if (cellType == CellType.NUMERIC) {
-                    System.out.print(cell.getNumericCellValue() + "\t");
-                } else if (cellType == CellType.BLANK) {
-                    System.out.print("BLANK\t");
-                }
-                rowData.put(sheet.getRow(0).getCell(cell.getColumnIndex()).getStringCellValue(), sheet.getRow(1).getCell(cell.getColumnIndex()).getStringCellValue());
+        for (int currentRow = 1; currentRow < sheet.getLastRowNum(); currentRow++) {
+            for (int currentCol = 0; currentCol < firstRow.getLastCellNum(); currentCol++) {
+                mapData.put(firstRow.getCell(currentCol).getStringCellValue(), sheet.getRow(currentRow).getCell(currentCol).getStringCellValue());
             }
-            excelDataList.add(rowData);
+            data.add(mapData);
         }
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        jsonPayload = objectMapper.writeValueAsString(excelDataList);
-        workbook.close();
-        return jsonPayload;
+        return data;
     }
-
-
 }
