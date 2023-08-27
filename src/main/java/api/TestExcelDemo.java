@@ -1,5 +1,6 @@
 package api;
 
+import groovyjarjarantlr4.v4.misc.OrderedHashMap;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,19 +16,19 @@ import java.util.Map;
 
 public class TestExcelDemo {
 
-    public static List<Map<String, String>> getExcelData() throws IOException {
+    public static List<OrderedHashMap<String, String>> getExcelData() throws IOException {
 
         // Load the Excel file
         FileInputStream excelFile = new FileInputStream("src/test/resources/CreateBooking.xlsx");
         Workbook workbook = new XSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is on the first sheet
-        Map<String, String> mapData = new HashMap<>();
 
         Row firstRow = sheet.getRow(0);
-        List<Map<String, String>> data = new ArrayList<>();
-
-
+        List<OrderedHashMap<String, String>> data = new ArrayList<>();
+        OrderedHashMap<String, String> mapData;
+        
         for (int currentRow = 1; currentRow <= sheet.getLastRowNum(); currentRow++) {
+            mapData = new OrderedHashMap<>();
             for (int currentCell = 0; currentCell < firstRow.getLastCellNum(); currentCell++) {
                 mapData.put(getCellValue(firstRow.getCell(currentCell)), getCellValue(sheet.getRow(currentRow).getCell(currentCell)));
             }
