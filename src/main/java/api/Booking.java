@@ -26,7 +26,7 @@ public class Booking extends ApiUtils {
     public ValidatableResponse createBooking() throws IOException {
         return given()
                 .spec(getRequestSpecs().build())
-                .body(getJsonAsListOfMap())
+                .body(getListOfMapsAsJsonArray())
                 .log()
                 .all()
                 .when()

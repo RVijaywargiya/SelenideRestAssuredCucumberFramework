@@ -3,6 +3,7 @@ package com.api.tests;
 import api.Booking;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.MockUtils;
@@ -15,22 +16,15 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static utils.ApiUtils.getStatusCode;
 
 public class AirlineTests {
-    Booking booking;
-
+    Booking booking = new Booking();
     SoftAssert softAssert = new SoftAssert();
-
     MockUtils mockUtils = new MockUtils();
     ValidatableResponse allBookingResponse;
     ValidatableResponse createBookingResponse;
 
-    public AirlineTests() throws IOException {
-        booking = new Booking();
-        allBookingResponse = booking.getAllBookings();
-        createBookingResponse = booking.createBooking();
-    }
-
-    @Test(enabled = false)
+    @Ignore
     public void verifyGetBookingStatusCode() throws IOException {
+        allBookingResponse = booking.getAllBookings();
         softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
         booking.getBookingAsClass();
         System.out.println(booking.getBookingAsClass().toString());
@@ -38,10 +32,11 @@ public class AirlineTests {
 
     @Test
     public void verifyCreateBookingStatusCode() throws IOException {
+        createBookingResponse = booking.createBooking();
         softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
     }
 
-    @Test(enabled = false)
+    @Ignore
     public void testMock() {
         mockUtils.startMockServer();
         mockUtils.setWireMockServer();

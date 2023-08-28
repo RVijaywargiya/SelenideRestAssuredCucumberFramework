@@ -1,14 +1,10 @@
 package utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.ValidatableResponse;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public class ApiUtils extends ExcelUtils {
 
@@ -22,12 +18,9 @@ public class ApiUtils extends ExcelUtils {
         return new PropertyUtils().getProperty("src/main/resources/config/api-config.properties", "basePathPOST");
     }
 
-    public List<Map<String, String>> getJsonAsListOfMap() throws IOException {
-//        JSONObject jsonObject = new JSONObject();
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        JSONArray jsonArray = new JSONArray();
-
-        return ExcelUtils.getExcelData();
+    public String getListOfMapsAsJsonArray() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(ExcelUtils.getExcelData());
     }
 
     public void writeJsonToFile(ValidatableResponse response, String outputFile) throws IOException {

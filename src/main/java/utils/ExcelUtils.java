@@ -1,39 +1,63 @@
 package utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.poi.ss.formula.functions.Column;
+import groovyjarjarantlr4.v4.misc.OrderedHashMap;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class ExcelUtils {
 
-    static String jsonPayload;
-
-    public static List<Map<String, String>> getExcelData() throws IOException {
+    public static LinkedHashMap<String, Object> getExcelData() throws IOException {
 
         // Load the Excel file
         FileInputStream excelFile = new FileInputStream("src/test/resources/CreateBooking.xlsx");
         Workbook workbook = new XSSFWorkbook(excelFile);
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is on the first sheet
-        Map<String, String> mapData = new HashMap<>();
 
         Row firstRow = sheet.getRow(0);
-        List<Map<String, String>> data = new ArrayList<>();
+//        List<Map<String, Object>> data = new ArrayList<>();
+        OrderedHashMap<String, Object> mapData = null;
+        OrderedHashMap<String, Object> bookingDates;
 
         for (int currentRow = 1; currentRow < sheet.getLastRowNum(); currentRow++) {
+            mapData = new OrderedHashMap<>();
+            bookingDates = new OrderedHashMap<>();
             for (int currentCol = 0; currentCol < firstRow.getLastCellNum(); currentCol++) {
-                mapData.put(firstRow.getCell(currentCol).getStringCellValue(), sheet.getRow(currentRow).getCell(currentCol).getStringCellValue());
+                if (getCellValue(firstRow.getCell(currentCol)).equals("checkin")) {
+                    bookingDates.put("checkin", getCellValue(sheet.getRow(currentRow).getCell(currentCol)));
+                    mapData.put("bookingdates", bookingDates);
+                } else if (getCellValue(firstRow.getCell(currentCol)).equals("checkout")) {
+                    bookingDates.put("checkout", getCellValue(sheet.getRow(currentRow).getCell(currentCol)));
+                    mapData.put("bookingdates", bookingDates);
+                }
+                else {
+                    mapData.put((String) getCellValue(firstRow.getCell(currentCol)), getCellValue(sheet.getRow(currentRow).getCell(currentCol)));
+                }
             }
-            data.add(mapData);
+//            data.add(mapData);
         }
-        return data;
+        return mapData;
+    }
+
+    private static Object getCellValue(Cell cell) {
+        Object cellValue = null;
+        switch (cell.getCellType()) {
+            case NUMERIC -> {
+                cellValue = (int) cell.getNumericCellValue();
+            }
+
+            case STRING -> {
+                cellValue = cell.getStringCellValue();
+            }
+
+            case BOOLEAN -> {
+                cellValue = cell.getBooleanCellValue();
+            }
+
+        }
+        return cellValue;
     }
 }
