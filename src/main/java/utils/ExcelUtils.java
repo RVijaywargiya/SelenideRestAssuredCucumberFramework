@@ -18,7 +18,6 @@ public class ExcelUtils {
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is on the first sheet
 
         Row firstRow = sheet.getRow(0);
-//        List<Map<String, Object>> data = new ArrayList<>();
         OrderedHashMap<String, Object> mapData = null;
         OrderedHashMap<String, Object> bookingDates;
 
@@ -37,7 +36,6 @@ public class ExcelUtils {
                     mapData.put((String) getCellValue(firstRow.getCell(currentCol)), getCellValue(sheet.getRow(currentRow).getCell(currentCol)));
                 }
             }
-//            data.add(mapData);
         }
         return mapData;
     }
