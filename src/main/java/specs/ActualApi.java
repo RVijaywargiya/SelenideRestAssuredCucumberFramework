@@ -1,5 +1,6 @@
-package api;
+package specs;
 
+import interfaces.SpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -11,9 +12,9 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static utils.ApiUtils.getBaseUri;
 
-public class SpecBuilder {
+public class ActualApi implements SpecBuilder {
 
-    public static RequestSpecification getRequestSpecs() throws IOException {
+    public RequestSpecification getRequestSpecs() throws IOException {
         return new RequestSpecBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
@@ -22,9 +23,13 @@ public class SpecBuilder {
                 .build();
     }
 
-    public static ResponseSpecification getResponseSpec() {
+    public ResponseSpecification getResponseSpecs() {
         return new ResponseSpecBuilder().
                 log(LogDetail.ALL).
                 build();
+    }
+
+    public static ActualApi getInstance() {
+        return new ActualApi();
     }
 }

@@ -4,7 +4,6 @@ import api.Booking;
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -13,7 +12,6 @@ import utils.MockUtils;
 
 import java.io.IOException;
 
-import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
 import static utils.ApiUtils.getStatusCode;
@@ -25,6 +23,7 @@ public class AirlineTests {
     MockUtils mockUtils = new MockUtils();
     Response allBookingResponse;
     Response createBookingResponse;
+    Response mockResponse;
 
     @BeforeSuite
     public void setAllureReporting() {
@@ -45,18 +44,12 @@ public class AirlineTests {
         softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
     }
 
+    @Test
     @Ignore
     public void testMock() {
         mockUtils.startMockServer();
         mockUtils.setWireMockServer();
-        ValidatableResponse response = given()
-                .baseUri("http://localhost:8080")
-                .log()
-                .everything()
-                .get("/test")
-                .then()
-                .log()
-                .all();
+        mockResponse = booking.getMockResponse();
         mockUtils.stopMockServer();
     }
 }
