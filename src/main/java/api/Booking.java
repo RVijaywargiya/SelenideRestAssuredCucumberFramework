@@ -1,42 +1,41 @@
 package api;
 
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.ResponseSpecification;
 import pojo.BookingDetails;
 import utils.ApiUtils;
 
 import java.io.IOException;
 
 import static api.SpecBuilder.getRequestSpecs;
+import static api.SpecBuilder.getResponseSpec;
 import static io.restassured.RestAssured.given;
 
 public class Booking extends ApiUtils {
 
-    public ValidatableResponse getAllBookings() throws IOException {
+    @Step
+    public Response getAllBookings() throws IOException {
         return given()
-                .spec(getRequestSpecs().build())
-                .log()
-                .all()
+                .spec(getRequestSpecs())
                 .when()
                 .get(getBasePathGET())
                 .then()
-                .log()
-                .all();
+                .spec(getResponseSpec())
+                .extract()
+                .response();
     }
 
-    public ValidatableResponse createBooking() throws IOException {
+    public Response createBooking() throws IOException {
         return given()
-                .spec(getRequestSpecs().build())
+                .spec(getRequestSpecs())
                 .body(getListOfMapsAsJsonArray())
-                .log()
-                .all()
                 .when()
                 .post(getBasePathPOST())
                 .then()
-                .log()
-                .all();
-    }
-
-    public BookingDetails getBookingAsClass() throws IOException {
-        return getAllBookings().extract().as(BookingDetails.class);
+                .spec(getResponseSpec())
+                .extract()
+                .response();
     }
 }

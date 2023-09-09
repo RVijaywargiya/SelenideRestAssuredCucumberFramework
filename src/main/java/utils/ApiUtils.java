@@ -1,6 +1,10 @@
 package utils;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.selenide.AllureSelenide;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import java.io.FileWriter;
@@ -33,7 +37,12 @@ public class ApiUtils extends ExcelUtils {
         }
     }
 
-    public static int getStatusCode(ValidatableResponse response) {
-        return response.extract().statusCode();
+    public static int getStatusCode(Response response) {
+        return response.statusCode();
+    }
+
+    public static void setUpAllure() {
+        Configuration.reportsFolder = "allure-reports";
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     }
 }
