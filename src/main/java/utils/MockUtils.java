@@ -16,7 +16,7 @@ public class MockUtils {
 
     public void setWireMockServer() {
         configureFor("localhost", 8080);
-        stubFor(get(urlPathEqualTo("/test"))
+        stubFor(get(urlEqualTo("/test"))
                 .willReturn(aResponse().withStatus(200)
                         .withBody("{\"message\": \"Mocked response\"}")));
     }

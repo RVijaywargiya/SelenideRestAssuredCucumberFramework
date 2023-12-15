@@ -45,7 +45,7 @@ public class AirlineTests {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void testMock() {
         mockUtils.startMockServer();
         mockUtils.setWireMockServer();

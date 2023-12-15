@@ -9,7 +9,6 @@ import io.restassured.specification.ResponseSpecification;
 
 import java.io.IOException;
 
-import static io.restassured.RestAssured.given;
 import static utils.ApiUtils.getBaseUri;
 
 public class ActualApi implements SpecBuilder {

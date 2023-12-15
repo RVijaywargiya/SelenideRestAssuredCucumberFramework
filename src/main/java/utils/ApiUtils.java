@@ -7,7 +7,6 @@ import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class ApiUtils extends ExcelUtils {
@@ -27,15 +26,15 @@ public class ApiUtils extends ExcelUtils {
         return objectMapper.writeValueAsString(ExcelUtils.getExcelData());
     }
 
-    public void writeJsonToFile(ValidatableResponse response, String outputFile) throws IOException {
-        String responseBody = response.extract().asString();
-        try (FileWriter fileWriter = new FileWriter(outputFile)) {
-            fileWriter.write(responseBody); // Use an indentation of 4 for pretty printing
-            System.out.println("Response saved to response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void writeJsonToFile(ValidatableResponse response, String outputFile) {
+//        String responseBody = response.extract().asString();
+//        try (FileWriter fileWriter = new FileWriter(outputFile)) {
+//            fileWriter.write(responseBody); // Use an indentation of 4 for pretty printing
+//            System.out.println("Response saved to response.json");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static int getStatusCode(Response response) {
         return response.statusCode();
