@@ -11,17 +11,15 @@ import java.io.IOException;
 
 public class Mock implements SpecBuilder {
 
-    public RequestSpecification getRequestSpecs() {
+    public RequestSpecBuilder getRequestSpecs() {
         return new RequestSpecBuilder()
                 .setBaseUri("http://localhost:8080")
-                .log(LogDetail.ALL)
-                .build();
+                .log(LogDetail.ALL);
     }
 
-    public ResponseSpecification getResponseSpecs() {
+    public ResponseSpecBuilder getResponseSpecs() {
         return new ResponseSpecBuilder()
-                .log(LogDetail.ALL)
-                .build();
+                .log(LogDetail.ALL);
     }
 
     public static Mock getInstance() {

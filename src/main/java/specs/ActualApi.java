@@ -13,19 +13,17 @@ import static utils.ApiUtils.getBaseUri;
 
 public class ActualApi implements SpecBuilder {
 
-    public RequestSpecification getRequestSpecs() throws IOException {
+    public RequestSpecBuilder getRequestSpecs() throws IOException {
         return new RequestSpecBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
                 .setBaseUri(getBaseUri())
-                .log(LogDetail.ALL)
-                .build();
+                .log(LogDetail.ALL);
     }
 
-    public ResponseSpecification getResponseSpecs() {
-        return new ResponseSpecBuilder().
-                log(LogDetail.ALL).
-                build();
+    public ResponseSpecBuilder getResponseSpecs() {
+        return new ResponseSpecBuilder()
+                .log(LogDetail.ALL);
     }
 
     public static ActualApi getInstance() {

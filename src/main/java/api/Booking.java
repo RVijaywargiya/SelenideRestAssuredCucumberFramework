@@ -15,34 +15,34 @@ public class Booking extends ApiUtils {
     @Step
     public Response getAllBookings() throws IOException {
         return given()
-                .spec(ActualApi.getInstance().getRequestSpecs())
+                .spec(ActualApi.getInstance().getRequestSpecs().build())
                 .when()
                 .get(getBasePathGET())
                 .then()
-                .spec(ActualApi.getInstance().getResponseSpecs())
+                .spec(ActualApi.getInstance().getResponseSpecs().build())
                 .extract()
                 .response();
     }
 
     public Response createBooking() throws IOException {
         return given()
-                .spec(ActualApi.getInstance().getRequestSpecs())
+                .spec(ActualApi.getInstance().getRequestSpecs().build())
                 .body(getListOfMapsAsJsonArray())
                 .when()
                 .post(getBasePathPOST())
                 .then()
-                .spec(ActualApi.getInstance().getResponseSpecs())
+                .spec(ActualApi.getInstance().getResponseSpecs().build())
                 .extract()
                 .response();
     }
 
     public Response getMockResponse() {
         return given()
-                .spec(Mock.getInstance().getRequestSpecs())
+                .spec(Mock.getInstance().getRequestSpecs().build())
                 .when()
                 .get("/test")
                 .then()
-                .spec(Mock.getInstance().getResponseSpecs())
+                .spec(Mock.getInstance().getResponseSpecs().build())
                 .extract()
                 .response();
     }

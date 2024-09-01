@@ -1,5 +1,7 @@
 package interfaces;
 
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -7,7 +9,7 @@ import java.io.IOException;
 
 public interface SpecBuilder {
 
-    RequestSpecification getRequestSpecs() throws IOException;
+    RequestSpecBuilder getRequestSpecs() throws IOException;
 
-    ResponseSpecification getResponseSpecs();
+    ResponseSpecBuilder getResponseSpecs();
 }
