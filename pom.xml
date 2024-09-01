@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
@@ -13,7 +13,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <aspectj.version>1.9.6</aspectj.version>
-    <jackson.version>2.5.2</jackson.version>
+    <jackson.version>2.15.0</jackson.version> <!-- Updated version -->
+    <java.version>21</java.version>
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
+<!--    <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>-->
   </properties>
 
   <build>
@@ -21,22 +25,20 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>17</source>
-          <target>17</target>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M6</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <testSourceDirectory>src/test/java</testSourceDirectory>
-          <dependenciesToScan>
-            <groupId>testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.8.0</version> <!-- JUnit version -->
-          </dependenciesToScan>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
         </configuration>
       </plugin>
     </plugins>
@@ -44,87 +46,85 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.10.0</version> <!-- Updated JUnit version -->
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
       <version>6.15.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.8.0</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-core</artifactId>
       <version>7.8.0</version>
     </dependency>
+
     <dependency>
       <groupId>net.datafaker</groupId>
       <artifactId>datafaker</artifactId>
       <version>1.9.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.28</version>
+      <version>1.18.30</version>
     </dependency>
+
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <version>5.3.0</version>
     </dependency>
+
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
       <artifactId>wiremock</artifactId>
       <version>2.27.2</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>5.2.3</version>
     </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-reload4j</artifactId>
       <version>2.0.0-alpha7</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <version>2.19.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide -->
+
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-selenide</artifactId>
       <version>2.20.1</version>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>2.5.2</version>
-    </dependency>
+
   </dependencies>
 </project>

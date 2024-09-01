@@ -2,7 +2,9 @@ package utils;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
 
@@ -23,6 +25,7 @@ public class BrowserUtils {
     }
 
     public BrowserUtils openSite() throws IOException {
+        WebDriverManager.chromedriver().setup();
         open(new PropertyUtils().getProperty("src/main/resources/config/ui-config.properties","url"));
         return this;
     }
