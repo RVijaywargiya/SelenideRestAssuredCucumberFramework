@@ -18,23 +18,32 @@ import static utils.ApiUtils.getStatusCode;
 import static utils.ApiUtils.setUpAllure;
 
 public class AirlineTests {
-    Booking booking = new Booking();
-    SoftAssert softAssert = new SoftAssert();
-    MockUtils mockUtils = new MockUtils();
+    private Booking booking;
+    private SoftAssert softAssert;
+    private MockUtils mockUtils;
     Response allBookingResponse;
     Response createBookingResponse;
     Response mockResponse;
 
     @BeforeSuite
-    public void setAllureReporting() {
+    public void setUp() {
+        booking = new Booking();
+        softAssert = new SoftAssert();
+        mockUtils = new MockUtils();
         setUpAllure();
     }
+
+//    @BeforeSuite
+//    public void setAllureReporting() {
+//        setUpAllure();
+//    }
 
     @Test
     @Link(name = "allure", type = "mylink")
     public void verifyGetBookingStatusCode() throws IOException {
         allBookingResponse = booking.getAllBookings();
         softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
+        softAssert.assertAll();
     }
 
     @Test
@@ -42,6 +51,7 @@ public class AirlineTests {
     public void verifyCreateBookingStatusCode() throws IOException {
         createBookingResponse = booking.createBooking();
         softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
+        softAssert.assertAll();
     }
 
     @Test
