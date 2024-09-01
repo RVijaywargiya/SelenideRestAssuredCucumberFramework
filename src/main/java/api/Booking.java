@@ -2,7 +2,7 @@ package api;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import specs.ActualApi;
+import specs.ApiSpecBuilder;
 import specs.Mock;
 import utils.ApiUtils;
 
@@ -15,23 +15,23 @@ public class Booking extends ApiUtils {
     @Step
     public Response getAllBookings() throws IOException {
         return given()
-                .spec(ActualApi.getInstance().getRequestSpecs().build())
+                .spec(ApiSpecBuilder.getInstance().getRequestSpecs().build())
                 .when()
                 .get(getBasePathGET())
                 .then()
-                .spec(ActualApi.getInstance().getResponseSpecs().build())
+                .spec(ApiSpecBuilder.getInstance().getResponseSpecs().build())
                 .extract()
                 .response();
     }
 
     public Response createBooking() throws IOException {
         return given()
-                .spec(ActualApi.getInstance().getRequestSpecs().build())
+                .spec(ApiSpecBuilder.getInstance().getRequestSpecs().build())
                 .body(getListOfMapsAsJsonArray())
                 .when()
                 .post(getBasePathPOST())
                 .then()
-                .spec(ActualApi.getInstance().getResponseSpecs().build())
+                .spec(ApiSpecBuilder.getInstance().getResponseSpecs().build())
                 .extract()
                 .response();
     }

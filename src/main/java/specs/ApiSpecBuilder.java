@@ -4,14 +4,12 @@ import interfaces.SpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
 import java.io.IOException;
 
 import static utils.ApiUtils.getBaseUri;
 
-public class ActualApi implements SpecBuilder {
+public class ApiSpecBuilder implements SpecBuilder {
 
     public RequestSpecBuilder getRequestSpecs() throws IOException {
         return new RequestSpecBuilder()
@@ -26,7 +24,7 @@ public class ActualApi implements SpecBuilder {
                 .log(LogDetail.ALL);
     }
 
-    public static ActualApi getInstance() {
-        return new ActualApi();
+    public static ApiSpecBuilder getInstance() {
+        return new ApiSpecBuilder();
     }
 }

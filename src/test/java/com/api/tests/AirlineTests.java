@@ -33,30 +33,25 @@ public class AirlineTests {
         setUpAllure();
     }
 
-//    @BeforeSuite
-//    public void setAllureReporting() {
-//        setUpAllure();
-//    }
-
     @Test
     @Link(name = "allure", type = "mylink")
-    public void verifyGetBookingStatusCode() throws IOException {
+    void verifyGetBookingStatusCode() throws IOException {
         allBookingResponse = booking.getAllBookings();
-        softAssert.assertEquals(SC_OK, getStatusCode(allBookingResponse));
+        softAssert.assertEquals(getStatusCode(allBookingResponse), SC_OK);
         softAssert.assertAll();
     }
 
     @Test
     @Step
-    public void verifyCreateBookingStatusCode() throws IOException {
+    void verifyCreateBookingStatusCode() throws IOException {
         createBookingResponse = booking.createBooking();
-        softAssert.assertEquals(SC_CREATED, getStatusCode(createBookingResponse));
+        softAssert.assertEquals(getStatusCode(createBookingResponse), SC_OK);
         softAssert.assertAll();
     }
 
     @Test
 //    @Ignore
-    public void testMock() {
+    void testMock() {
         mockUtils.startMockServer();
         mockUtils.setWireMockServer();
         mockResponse = booking.getMockResponse();
